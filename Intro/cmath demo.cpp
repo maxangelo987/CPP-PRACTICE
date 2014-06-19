@@ -1,17 +1,15 @@
 /*******************************************************************************
-**	Author:		Robert Kety
+**	Author:		    Robert Kety
 **	Date Created:	07/08/2013
-**	Last Modified:	07/08/2013
-**	File Name:	Kety_functions.cpp
+**	Last Modified:	06/18/2014
 **	Description:	A demonstration of various functions available in the
-**			cmath library
-**	Input:		Equations stated in step 14 of lab2.pdf. Entered 
-**			directly into code.
-**	Output:		Description of equation and solution to equation in 
-**			correct integer- of floating-point-type format.
+**	        		cmath library
+**	Input:	    	Equations stated in step 14 of lab2.pdf. Entered 
+**			        directly into code.
+**	Output:		    Description of equation and solution to equation in 
+**			        correct integer- of floating-point-type format.
 **	Acknowledgement:http://www.cplusplus.com/reference/cmath/
 *******************************************************************************/
-
 
 #include <iostream>
 #include <cmath>
@@ -22,7 +20,7 @@ int main() {
 	long long int 	powerFunction1, powerFunction5;	//To prevent overflow
 	short 		powerFunction2, powerFunction3, absAndRoundFunction;
 	float 		powerFunction4, roundFunction, trigFunction, 
-			expFunction1, expFunction2, expFunction3;
+                expFunction1, expFunction2, expFunction3;
 
 	powerFunction1		= (long long int)(std::pow(((float)2), 32)) - 1;
 	powerFunction2		= std::pow(5.0, 3);

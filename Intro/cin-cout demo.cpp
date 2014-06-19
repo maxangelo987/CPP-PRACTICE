@@ -1,13 +1,11 @@
 /************************************************************************
- *	Author:		Robert Kety
- *	Date Created:	07/10/2013
- *	Last Modified:	07/11/2013
- *	File Name:	Kety_test.cpp
- *	Description:	Simple program to demonstrate input/output.
- *	Input:		Integer response from user.
- *	Output:		Prompt for input and output based on input.
- *	Acknowledgements:
- *			Lab3.pdf
+ *	Author:		        Robert Kety
+ *	Date Created:	    07/10/2013
+ *	Last Modified:	    06/18/2014
+ *	Description:    	Simple program to demonstrate input/output.
+ *	Input:		        Integer response from user.
+ *	Output:		        Prompt for input and output based on input.
+ *	Acknowledgements:   Lab3.pdf
  * ********************************************************************/
 #include <iostream>
 

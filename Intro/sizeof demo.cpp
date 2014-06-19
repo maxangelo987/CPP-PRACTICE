@@ -1,19 +1,17 @@
 /***********************************************************************
-**	Author:		Robert Kety
+**	Author:		    Robert Kety
 **	Creation Date:	07/08/2013
-**	Last Modified:	07/08/2013
-**	File Name:	Kety_var_sizes.cpp
+**	Last Modified:	06/18/2014
 **	Description:	Determines the number of bits for integer and
-**			floating-point variables.
-**	Input:		The size of each variable determined by the 
-**			sizeof function and the number of bits in a
-**			byte determined by the macro NUM_BITS_IN_BYTE.
-**	Output:		The value of each variable type and its 
-**			corresponding bits of memory.
+**			        floating-point variables.  This is a demonstration
+**                  of the sizeof functionality in C++
+**	Input:		    The size of each variable determined by the 
+**			        sizeof function and the number of bits in a
+**			        byte determined by the macro NUM_BITS_IN_BYTE.
+**	Output:		    The value of each variable type and its 
+**			        corresponding bits of memory.
 **	Acknowledgement:lab2.pdf
 ***********************************************************************/
-
-
 
 #include <iostream>
 
