@@ -1,7 +1,7 @@
 /*****************************************************************************
  * Author:           Robert Kety
  * Date Created:     10/09/2013
- * Last Modified:    10/09/2013
+ * Last Modified:    06/19/2014
  * Description:      Collect a username and password that meets format
  *                   requirements and output to screen.
  * Input:            An 8 letter username and 8 character password. The
@@ -23,14 +23,14 @@ using Authenticate::inputPassword;
 using Authenticate::getPassword;
 
 int main(){
-   /* Prompt user for valid username and password */
-   inputUserName( );
-   inputPassword( );
+    /* Prompt user for valid username and password */
+    inputUserName( );
+    inputPassword( );
 
-   /* Echo username and password to user */
-   cout << "Your username is " << getUserName( )
-        << " and your password is: "
-        << getPassword( ) << endl;
+    /* Echo username and password to user */
+    cout << "Your username is " << getUserName( )
+         << " and your password is: "
+         << getPassword( ) << endl;
 
-   return 0;
+    return 0;
 }
