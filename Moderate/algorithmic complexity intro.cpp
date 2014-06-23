@@ -1,3 +1,9 @@
+/*
+    Author:       Robert Kety
+    Modified:     06/23/2014
+    Descriptions: This is a simple program for timing different operations - an
+                  introductory examination of algorithmic complexity.
+*/
 #include <iostream>
 #include <cmath>         /* For use of pow() */
 #include <sys/time.h>      /* Necessary for timing functions */

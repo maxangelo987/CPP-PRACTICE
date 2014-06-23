@@ -1,7 +1,7 @@
 /*****************************************************************************
  * Author:           Robert Kety
- * Date Created:     11/8/2013
- * Last Modified:    11/8/2013
+ * Date Created:     11/08/2013
+ * Last Modified:    06/22/2014
  * Description:      Sample code to test the getProductID function.  The 
  *                   getProductID function scans an array of strings for a
  *                   matching string and returns a corresponding number
@@ -30,31 +30,31 @@ using std::endl;
 int getProductID(int ids[], string names[], int numProducts, 
                  string target) throw (string);
 
-int main(){    // Sample code to test the getProductID function
-   int productIds[] = {4, 5, 8, 10, 13};
-   string products[] = {"computer", "flash drive", "mouse", "printer",
-                        "camera"};
-   try{
-      cout << getProductID(productIds, products, 5, "mouse") << endl;
-      cout << getProductID(productIds, products, 5, "camera") << endl;
-      cout << getProductID(productIds, products, 5, "laptop") << endl;
-   }
-   catch(string e){
-      cout << "Product \"" << e << "\" not found!\n";
-   }
-   
-   return 0;
+int main(){     // Sample code to test the getProductID function
+    int productIds[] = {4, 5, 8, 10, 13};
+    string products[] = {"computer", "flash drive", "mouse", "printer",
+                                "camera"};
+    try{
+        cout << getProductID(productIds, products, 5, "mouse") << endl;
+        cout << getProductID(productIds, products, 5, "camera") << endl;
+        cout << getProductID(productIds, products, 5, "laptop") << endl;
+    }
+    catch(string e){
+        cout << "Product \"" << e << "\" not found!\n";
+    }
+    
+    return 0;
 }
 
 /* The getProductID function scans an array of strings for a matching string 
-   and returns a corresponding number associated with that product.  If no 
-   there is no match, the target string is thrown as an unhandled exception by
-   the getProductID function. */
+    and returns a corresponding number associated with that product.  If no 
+    there is no match, the target string is thrown as an unhandled exception by
+    the getProductID function. */
 int getProductID(int ids[], string names[], int numProducts, 
-                 string target) throw(string){
-   for(int i = 0; i < numProducts; i++)
-      if (names[i] == target)
-         return ids[i];
-   
-   throw target;
+                      string target) throw(string){
+    for(int i = 0; i < numProducts; i++)
+        if (names[i] == target)
+            return ids[i];
+    
+    throw target;
 }

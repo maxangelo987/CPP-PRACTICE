@@ -1,7 +1,7 @@
 /*****************************************************************************
  * Author:           Robert Kety
  * Date Created:     11/21/2013
- * Last Modified:    11/21/2013
+ * Last Modified:    06/23/2014
  * Description:      Demonstrates some of the features required in Programming
  *                   Project 3 of Chapter 17.  Limited demonstration is based
  *                   on project guidelines, not developer preference.  The 
@@ -98,201 +98,201 @@ void outputPoly(polynomialNodePtr& head);
 void outputList(polynomialNodePtr& head);
 
 int main(){
-   string userPoly;   
-   polynomialNodePtr head, next;
-   int x = 0, sum = 0;
-   
-   /* Prompt for polynomial */
-   cout << "\n\nPlease enter a polynomial in the following format:";
-   cout << "\nax^n + ax^n-1 + ... + a\n";
-   cout << "\nPlease enter the entire polynomial on one line and hit enter"
-        << " to submit: \n";
-   getline(cin, userPoly);
-   
-   /* Convert input into a linked list of polynomialNodes */
-   head = stringToList(userPoly);   
-   
-   /* Echo polynomial to confirm accurate reading */
-   cout << "\nYour polynomial: ";
-   outputList(head);
-   
-   /* Prompt for x */
-   cout << "\nEnter an integer x-value: ";
-   cin >> x;
-   
-   /* Solve for x */
-   next = head;
-   while(next != NULL){
-      sum += next->calculate(x);
-      next = next->getLink();
-   }
-   
-   /* Output results of function calculation */
-   cout << "\nThe sum of ";
-   outputList(head);
-   cout << " at a value of " << x << " is: " << sum;
-   
-   cout << "\n\n";     //Extra white space for readability
-   
-   delete head;
-   
-   return 0;
+    string userPoly;    
+    polynomialNodePtr head, next;
+    int x = 0, sum = 0;
+    
+    /* Prompt for polynomial */
+    cout << "\n\nPlease enter a polynomial in the following format:";
+    cout << "\nax^n + ax^n-1 + ... + a\n";
+    cout << "\nPlease enter the entire polynomial on one line and hit enter"
+          << " to submit: \n";
+    getline(cin, userPoly);
+    
+    /* Convert input into a linked list of polynomialNodes */
+    head = stringToList(userPoly);    
+    
+    /* Echo polynomial to confirm accurate reading */
+    cout << "\nYour polynomial: ";
+    outputList(head);
+    
+    /* Prompt for x */
+    cout << "\nEnter an integer x-value: ";
+    cin >> x;
+    
+    /* Solve for x */
+    next = head;
+    while(next != NULL){
+        sum += next->calculate(x);
+        next = next->getLink();
+    }
+    
+    /* Output results of function calculation */
+    cout << "\nThe sum of ";
+    outputList(head);
+    cout << " at a value of " << x << " is: " << sum;
+    
+    cout << "\n\n";      //Extra white space for readability
+    
+    delete head;
+    
+    return 0;
 }
 
 /* Operator overload for addition.  Two polynomialNodes can only be
-   added when they share the same power of x */
+    added when they share the same power of x */
 polynomialNode polynomialNode::operator +(const polynomialNode& right){
-   if(right.getPower() == power)
-      return polynomialNode(coefficient + right.getCoeff(), 
-                            power);
-   else{
-      cout << "\n\nCannot add nodes of different power " 
-           << "without first solving for x\n\n";
-      exit(1);
-   }
+    if(right.getPower() == power)
+        return polynomialNode(coefficient + right.getCoeff(), 
+                                     power);
+    else{
+        cout << "\n\nCannot add nodes of different power " 
+              << "without first solving for x\n\n";
+        exit(1);
+    }
 }
 
 /* Operator overload for subtraction.  Two polynomialNodes can only be
-   subtracted when they share the same power of x */
+    subtracted when they share the same power of x */
 polynomialNode polynomialNode::operator -(const polynomialNode& right){
-   if(right.getPower() == power)
-      return polynomialNode(coefficient - right.getCoeff(), 
-                            power);
-   else{
-      cout << "\n\nCannot subtract nodes of different power " 
-           << "without first solving for x\n\n";
-      exit(1);
-   }
+    if(right.getPower() == power)
+        return polynomialNode(coefficient - right.getCoeff(), 
+                                     power);
+    else{
+        cout << "\n\nCannot subtract nodes of different power " 
+              << "without first solving for x\n\n";
+        exit(1);
+    }
 }
 
 /* Operator overload for multiplication. */
 polynomialNode polynomialNode::operator *(const polynomialNode& right){
-   return polynomialNode(coefficient * right.getCoeff(), 
-                         power + right.getPower());
+    return polynomialNode(coefficient * right.getCoeff(), 
+                                 power + right.getPower());
 }
 
 /* Calculates this node based on x-value */
 int polynomialNode::calculate(int x){
-   int value;
-   value = coefficient * (int)(pow((double)x, power));
-   return value;
+    int value;
+    value = coefficient * (int)(pow((double)x, power));
+    return value;
 }
 
 /* Converts string user input into a linked list of polynomial nodes. */
 polynomialNodePtr stringToList(string userPoly){
-   polynomialNodePtr head = new polynomialNode();
-   polynomialNodePtr current = head, last = head;
-   string currentPoly = userPoly;
-   bool power = false;     //For determining constants
-   
-   removeSpaces(currentPoly);    //Removes spaces from string
-   
-   int next = 0;  //For handling the crop point in a string
-   
-   while(currentPoly.length() > 0){
-      /* Acquire coefficient */
-      for(int i = 0; i < currentPoly.length(); i++){
-         if(currentPoly[i] == 'x'){
-            power = true;
-            next = i;
-            if(next == 0)
-               current->setCoeff(1);
-            else
-               current->setCoeff(atoi((currentPoly.substr(0, next)).c_str()));
-               
-            currentPoly = currentPoly.substr(next + 2);
-            i = currentPoly.length();
-         }
-      }
-      /* Acquire power of x (if there is one) */
-      if(power){
-         power = false;
-         for(int i = 1; i < currentPoly.length(); i++)
-            if(!(isdigit(currentPoly[i]))){
-               next = i;
-               i = currentPoly.length();
-               current->setPower(atoi((currentPoly.substr(0, next)).c_str()));
-               currentPoly = currentPoly.substr(next);
-            }         
-      }
-      /* Handle constant of polynomial as a node with a power of 0 */
-      else{
-         current->setCoeff(atoi(currentPoly.c_str()));
-         currentPoly = "";
-      }
-      
-      /* Create next node in the list and move down the list */
-      if(currentPoly.length() > 0){
-         current->setLink(new polynomialNode());
-         current = last->getLink();
-         last = current;
-      }
-      
-      next = 0;   //Reset next break in the string
-   }
-   
-   return head;
+    polynomialNodePtr head = new polynomialNode();
+    polynomialNodePtr current = head, last = head;
+    string currentPoly = userPoly;
+    bool power = false;      //For determining constants
+    
+    removeSpaces(currentPoly);     //Removes spaces from string
+    
+    int next = 0;  //For handling the crop point in a string
+    
+    while(currentPoly.length() > 0){
+        /* Acquire coefficient */
+        for(int i = 0; i < currentPoly.length(); i++){
+            if(currentPoly[i] == 'x'){
+                power = true;
+                next = i;
+                if(next == 0)
+                    current->setCoeff(1);
+                else
+                    current->setCoeff(atoi((currentPoly.substr(0, next)).c_str()));
+                    
+                currentPoly = currentPoly.substr(next + 2);
+                i = currentPoly.length();
+            }
+        }
+        /* Acquire power of x (if there is one) */
+        if(power){
+            power = false;
+            for(int i = 1; i < currentPoly.length(); i++)
+                if(!(isdigit(currentPoly[i]))){
+                    next = i;
+                    i = currentPoly.length();
+                    current->setPower(atoi((currentPoly.substr(0, next)).c_str()));
+                    currentPoly = currentPoly.substr(next);
+                }            
+        }
+        /* Handle constant of polynomial as a node with a power of 0 */
+        else{
+            current->setCoeff(atoi(currentPoly.c_str()));
+            currentPoly = "";
+        }
+        
+        /* Create next node in the list and move down the list */
+        if(currentPoly.length() > 0){
+            current->setLink(new polynomialNode());
+            current = last->getLink();
+            last = current;
+        }
+        
+        next = 0;    //Reset next break in the string
+    }
+    
+    return head;
 }
 
 /* Removes all space characters from a string polynomial */
 void removeSpaces(string& currentPoly){
-   for(int i = 0; i < currentPoly.length(); i++)
-      if(currentPoly[i] == ' '){
-         /* Space in first element */
-         if (i < 1)
-            currentPoly = currentPoly.substr(1);
-         /* Space in middle elements */
-         else if(i < currentPoly.length() - 1)
-            currentPoly = currentPoly.substr(0, i) + 
-                          currentPoly.substr(i + 1);
-         /* Space in final element */
-         else
-            currentPoly = currentPoly.substr(0, i);
-         i--;  //Adjustment for the reduction of string size
-      }
+    for(int i = 0; i < currentPoly.length(); i++)
+        if(currentPoly[i] == ' '){
+            /* Space in first element */
+            if (i < 1)
+                currentPoly = currentPoly.substr(1);
+            /* Space in middle elements */
+            else if(i < currentPoly.length() - 1)
+                currentPoly = currentPoly.substr(0, i) + 
+                                  currentPoly.substr(i + 1);
+            /* Space in final element */
+            else
+                currentPoly = currentPoly.substr(0, i);
+            i--;  //Adjustment for the reduction of string size
+        }
 }
 
 /* Outputs a single node of a polynomial */
 void outputPoly(polynomialNodePtr& head){
-   if(head->getCoeff() != 0){
-      if(head->getPower() != 0){
-         if(head->getCoeff() != 1){
-            if(head->getCoeff() == -1)
-               cout << "-";
-            else
-               cout << head->getCoeff();
-         }
-         cout << "x^" << head->getPower();
-      }
-      else
-         cout << head->getCoeff();
-   }
-      
-   return;
+    if(head->getCoeff() != 0){
+        if(head->getPower() != 0){
+            if(head->getCoeff() != 1){
+                if(head->getCoeff() == -1)
+                    cout << "-";
+                else
+                    cout << head->getCoeff();
+            }
+            cout << "x^" << head->getPower();
+        }
+        else
+            cout << head->getCoeff();
+    }
+        
+    return;
 }
 
 /* Outputs the entire polynomial using a linked list of nodes */
 void outputList(polynomialNodePtr& head){
-   polynomialNodePtr next = head;
-   
-   while(next->getCoeff() == 0){
-      outputPoly(next);
-      next = next->getLink();
-   }
-   outputPoly(next);
-   next = next->getLink();
-   while(next != NULL){
-      if(next->getCoeff() < 0){
-         cout << " - ";
-         next->setCoeff(abs(next->getCoeff()));
-         outputPoly(next);
-         next->setCoeff(-(next->getCoeff()));
-         
-      }
-      else if(next->getCoeff() > 0){
-         cout << " + ";
-         outputPoly(next);
-      }
-      next = next->getLink();
-   }
+    polynomialNodePtr next = head;
+    
+    while(next->getCoeff() == 0){
+        outputPoly(next);
+        next = next->getLink();
+    }
+    outputPoly(next);
+    next = next->getLink();
+    while(next != NULL){
+        if(next->getCoeff() < 0){
+            cout << " - ";
+            next->setCoeff(abs(next->getCoeff()));
+            outputPoly(next);
+            next->setCoeff(-(next->getCoeff()));
+            
+        }
+        else if(next->getCoeff() > 0){
+            cout << " + ";
+            outputPoly(next);
+        }
+        next = next->getLink();
+    }
 }
